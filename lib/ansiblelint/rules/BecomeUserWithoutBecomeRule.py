@@ -34,13 +34,13 @@ def _get_subtasks(data):
             'always',
             'rescue']
     for name in block_names:
-        if name in data:
+        if name in (data or []):
             result += (data[name] or [])
     return result
 
 
 def _nested_search(term, data):
-    return ((term in data) or
+    return ((term in (data or [])) or
             reduce((lambda x, y: x or _nested_search(term, y)), _get_subtasks(data), False))
 
 
