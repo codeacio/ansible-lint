@@ -1,0 +1,33 @@
+name: Severity
+
+on: push
+
+jobs:
+  inline:
+    name: Severity test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Test error without severity
+      run: echo '::error file=.github/workflows/severity.yml,line=12,col=1::Test error without severity'
+      id: error-without-severity
+
+    - name: Test error with severity
+      run: echo '::error file=.github/workflows/severity.yml,line=16,col=1,severity=HIGH::Test error with severity'
+      id: error-severity
+
+    - name: Test warning without severity
+      run: echo '::warning file=.github/workflows/severity.yml,line=20,col=1::Test warning without severity'
+      id: warning-without-severity
+
+    - name: Test warning with severity
+      run: echo '::warning file=.github/workflows/severity.yml,line=24,col=1,severity=MEDIUM::Test warning with severity'
+      id: warning-severity
+
+    - name: Test debug without severity
+      run: echo '::debug file=.github/workflows/severity.yml,line=28,col=1::Test debug without severity'
+      id: debug-without-severity
+
+    - name: Test error with severity
+      run: echo '::debug file=.github/workflows/severity.yml,line=32,col=1,severity=LOW::Test debug with severity'
+      id: debug-severity
